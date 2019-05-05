@@ -1,0 +1,239 @@
+[Events]
+//Background and Video events
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+Sprite,Foreground,Centre,"Lyrics\l1a.png",320,240
+ M,0,39095,,115,425
+ F,0,39095,39428,0,1
+ F,0,43761,44095,1,0
+Sprite,Foreground,Centre,"Lyrics\l1b.png",320,240
+ M,0,39095,,405,425
+ F,0,42095,42428,0,1
+ F,0,43761,44095,1,0
+Sprite,Foreground,Centre,"Lyrics\l2a.png",320,240
+ M,0,44428,,165,425
+ F,0,44428,44761,0,1
+ F,0,49095,49428,1,0
+Sprite,Foreground,Centre,"Lyrics\l2b.png",320,240
+ M,0,47428,,475,425
+ F,0,47428,47761,0,1
+ F,0,49095,49428,1,0
+Sprite,Foreground,Centre,"Lyrics\l3a.png",320,240
+ M,0,49761,,-17.5,425
+ F,0,49761,50095,0,1
+ F,0,53928,54261,1,0
+Sprite,Foreground,Centre,"Lyrics\l3b.png",320,240
+ M,0,49761,,127.5,425
+ F,0,50761,51095,0,1
+ F,0,53928,54261,1,0
+Sprite,Foreground,Centre,"Lyrics\l3c.png",320,240
+ M,0,49761,,282.5,425
+ F,0,51261,51595,0,1
+ F,0,53928,54261,1,0
+Sprite,Foreground,Centre,"Lyrics\l3d.png",320,240
+ M,0,49761,,465,425
+ F,0,52261,52595,0,1
+ F,0,53928,54261,1,0
+Sprite,Foreground,Centre,"Lyrics\l3e.png",320,240
+ M,0,49761,,647.5,425
+ F,0,53428,53761,0,1
+ F,0,53928,54261,1,0
+Sprite,Foreground,Centre,"Lyrics\l4a.png",320,240
+ M,0,54095,,320,425
+ F,0,54428,54761,0,1
+ F,0,55761,56095,1,0
+Sprite,Foreground,Centre,"Lyrics\l5.png",320,240
+ M,0,56095,,320,425
+ F,0,56095,56428,0,1
+ F,0,56761,57095,1,0
+Sprite,Foreground,Centre,"Lyrics\l4b.png",320,240
+ F,0,57095,57428,0,1
+ F,0,59428,59761,1,0
+ M,0,59761,,197.5,425
+Sprite,Foreground,Centre,"Lyrics\l5.png",320,240
+ F,0,58595,58928,0,1
+ F,0,59428,59761,1,0
+ M,0,59761,,467.5,425
+Sprite,Foreground,Centre,"Lyrics\l6a.png",320,240
+ M,0,59761,,137.5,425
+ F,0,59761,60095,0,1
+ F,0,62095,62428,1,0
+Sprite,Foreground,Centre,"Lyrics\l6b.png",320,240
+ M,0,59761,,285,425
+ F,0,60428,60761,0,1
+ F,0,62095,62428,1,0
+Sprite,Foreground,Centre,"Lyrics\l6c.png",320,240
+ M,0,59761,,470,425
+ F,0,61761,62095,0,1
+ F,0,62095,62428,1,0
+Sprite,Foreground,Centre,"Lyrics\l7a.png",320,240
+ M,0,62428,,170,425
+ F,0,62428,62761,0,1
+ F,0,64761,65095,1,0
+Sprite,Foreground,Centre,"Lyrics\l7b.png",320,240
+ M,0,62428,,257.5,425
+ F,0,63095,63428,0,1
+ F,0,64761,65095,1,0
+Sprite,Foreground,Centre,"Lyrics\l7c.png",320,240
+ M,0,62428,,410,425
+ F,0,63761,64095,0,1
+ F,0,64761,65095,1,0
+Sprite,Foreground,Centre,"Lyrics\l8a.png",320,240
+ M,0,65095,,115,425
+ F,0,65095,65428,0,1
+ F,0,68095,68428,1,0
+Sprite,Foreground,Centre,"Lyrics\l8b.png",320,240
+ M,0,65095,,160,425
+ F,0,65761,66095,0,1
+ F,0,68095,68428,1,0
+Sprite,Foreground,Centre,"Lyrics\l8c.png",320,240
+ M,0,65095,,370,425
+ F,0,66428,66761,0,1
+ F,0,68095,68428,1,0
+Sprite,Foreground,Centre,"Lyrics\l8d.png",320,240
+ M,0,68761,,265,426
+ F,0,68761,69095,0,1
+ F,0,70095,70428,1,0
+Sprite,Foreground,Centre,"Lyrics\l8e.png",320,240
+ M,0,68761,,472.5,425
+ F,0,69761,70095,0,1
+ F,0,70095,70428,1,0
+Sprite,Foreground,Centre,"Lyrics\l6a.png",320,240
+ M,0,70428,,160,425
+ F,0,70428,70761,0,1
+ F,0,72428,72761,1,0
+Sprite,Foreground,Centre,"Lyrics\l9a.png",320,240
+ M,0,70428,,205,425
+ F,0,71095,71428,0,1
+ F,0,72428,72761,1,0
+Sprite,Foreground,Centre,"Lyrics\l9b.png",320,240
+ M,0,70428,,360,425
+ F,0,71595,71928,0,1
+ F,0,72428,72761,1,0
+Sprite,Foreground,Centre,"Lyrics\l10a.png",320,240
+ M,0,73095,,142.5,425
+ F,0,73095,73428,0,1
+ F,0,75428,75761,1,0
+Sprite,Foreground,Centre,"Lyrics\l10b.png",320,240
+ M,0,73095,,202.5,425
+ F,0,73761,74095,0,1
+ F,0,75428,75761,1,0
+Sprite,Foreground,Centre,"Lyrics\l10c.png",320,240
+ M,0,73095,,315,425
+ F,0,74428,74761,0,1
+ F,0,75428,75761,1,0
+Sprite,Foreground,Centre,"Lyrics\l10d.png",320,240
+ M,0,73095,,462.5,425
+ F,0,75095,75428,0,1
+ F,0,75428,75761,1,0
+Sprite,Foreground,Centre,"Lyrics\l6a.png",320,240
+ M,0,75761,,300,200
+ F,0,75761,76095,0,1
+ F,0,78428,78761,1,0
+Sprite,Foreground,Centre,"Lyrics\l9a.png",320,240
+ M,0,75761,,345,200
+ F,0,76428,76761,0,1
+ F,0,78428,78761,1,0
+Sprite,Foreground,Centre,"Lyrics\l11.png",320,240
+ M,0,75761,78428,320,240
+ F,0,77095,77428,0,1
+ F,0,77428,80761,1
+ S,0,78428,80761,1,1.25
+Sprite,Foreground,Centre,"Lyrics\l12a.png",320,240
+ M,0,91428,,320,240
+ S,0,91428,,1.25
+ F,0,91428,91761,0,1
+ F,0,91761,93261,1
+ F,0,93261,93303,1,0
+ F,0,93303,93345,0,1
+ F,0,93345,93386,1,0
+ F,0,93386,93428,0,1
+ F,0,93428,93470,1,0
+ F,0,93470,93511,0,1
+ F,0,93511,93553,1,0
+ F,0,93553,93595,0,1
+ F,0,93595,93636,1,0
+ F,0,93636,93678,0,1
+ F,0,93678,93720,1,0
+ F,0,93720,93761,0
+Sprite,Foreground,Centre,"Lyrics\l12b.png",320,240
+ S,0,91428,,1.25
+ F,0,93261,93303,0,1
+ F,0,93303,93345,1,0
+ F,0,93345,93386,0,1
+ F,0,93386,93428,1,0
+ F,0,93428,93470,0,1
+ F,0,93470,93511,1,0
+ F,0,93511,93553,0,1
+ F,0,93553,93595,1,0
+ F,0,93595,93636,0,1
+ F,0,93636,93678,1,0
+ F,0,93678,93720,0,1
+ F,0,93720,93761,1,0
+Sprite,Foreground,Centre,"Lyrics\l13a.png",320,240
+ M,0,99428,,255,240
+ F,0,99428,99761,0,1
+ F,0,104095,104428,1,0
+Sprite,Foreground,Centre,"Lyrics\l13b.png",320,240
+ M,0,99428,,465,240
+ F,0,101095,101428,0,1
+ F,0,104095,104428,1,0
+Sprite,Foreground,Centre,"Lyrics\l14a.png",320,240
+ M,0,104761,,148.5,425
+ F,0,104761,105095,0,1
+ F,0,108095,108428,1,0
+Sprite,Foreground,Centre,"Lyrics\l14b.png",320,240
+ M,0,104761,,405,425
+ F,0,106095,106428,0,1
+ F,0,108095,108428,1,0
+Sprite,Foreground,Centre,"Lyrics\l15a.png",320,240
+ M,0,108595,,215,425
+ F,0,108595,108928,0,1
+ F,0,110428,110761,1,0
+Sprite,Foreground,Centre,"Lyrics\l15b.png",320,240
+ M,0,108595,,500,425
+ F,0,109928,110261,0,1
+ F,0,110428,110761,1,0
+Sprite,Foreground,Centre,"Lyrics\l16.png",320,240
+ M,0,111095,,320,425
+ F,0,111095,111428,0,1
+ F,0,114761,115095,1,0
+Sprite,Foreground,Centre,"Lyrics\l14a.png",320,240
+ M,0,115428,,148.5,425
+ F,0,115428,115761,0,1
+ F,0,118761,119095,1,0
+Sprite,Foreground,Centre,"Lyrics\l14b.png",320,240
+ M,0,115428,,405,425
+ F,0,116761,117095,0,1
+ F,0,118761,119095,1,0
+Sprite,Foreground,Centre,"Lyrics\l15a.png",320,240
+ F,0,119095,119428,0,1
+ M,0,119261,,215,425
+ F,0,119428,121095,1
+Sprite,Foreground,Centre,"Lyrics\l15b.png",320,240
+ M,0,119261,,500,425
+ F,0,120595,120928,0,1
+ F,0,120928,121095,1
+Sprite,Foreground,Centre,"Lyrics\l17.png",320,240
+ M,0,121761,,320,240
+ F,0,121761,122095,0,1
+ F,0,122095,123428,1
+ F,0,123428,123761,1,0
+Sprite,Foreground,Centre,"Lyrics\l17.png",320,240
+ M,0,124428,,320,240
+ F,0,124428,124762,0,1
+ F,0,124762,126095,1
+ F,0,126095,126428,1,0
+Sprite,Foreground,Centre,"Lyrics\l18a.png",320,240
+ M,0,127095,,192,240
+ F,0,127095,127428,0,1
+ F,0,127428,131095,1,0.988988
+ F,0,131095,131428,0.988988,0
+Sprite,Foreground,Centre,"Lyrics\l18b.png",320,240
+ M,0,127095,,380,240
+ F,0,128095,128428,0,1
+ F,0,128428,131095,1
+ F,0,131095,131428,1,0
+//Storyboard Sound Samples
