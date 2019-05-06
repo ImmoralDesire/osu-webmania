@@ -102,11 +102,11 @@ export class Game {
     this.scrollSpeed = 24;
     this.speed = 1;
 
-    this.score = new Score();
+    this.keyEvents = new Set();
 
-    this.keyEvents = [];
+    this.clickableNotes = new Set();
 
-    this.clickableNotes = [];
+    this.playing = false;
   }
 
   sleep(ms) {
@@ -120,7 +120,7 @@ export class Game {
 
   init(callback) {
     this.state = 2;
-
+    this.score = new Score();
     switch (this.beatmap.keys) {
       case 4:
         {
@@ -157,18 +157,25 @@ export class Game {
   }
 
   async play() {
-    await this.sleep(3000);
+    //await this.sleep(3000);
     this.audioHandler.playSound();
     console.log(this.audioHandler.getCurrentTime());
+    this.playing = true;
   }
 
   resize(width, height) {
     if (this.state != 2) return;
 
+    var target_height = 1080;
+
     canvas.width = width;
     canvas.height = height;
     this.width = width;
     this.height = height;
+
+    Key.width = (this.height / target_height) * 128;
+    Key.height = Key.width * 1.4;
+
     this.renderer.resize();
   }
 
@@ -178,6 +185,18 @@ export class Game {
 
   update() {
     if (this.state != 2) return;
+
+    if(this.beatmap.hitObjects.size == 0 && this.playing) {
+      this.playing = false;
+      document.getElementById('load').style = 'display: none';
+      document.getElementById('menu').style = 'display: block;';
+      document.getElementById('game').style = 'display: none;';
+
+      console.log(this.score);
+
+      this.state = 1;
+    }
+
     this.audioHandler.update();
 
     var now = this.now();
@@ -190,13 +209,13 @@ export class Game {
 
     var clicked = [];
 
-    if (this.clickableNotes.length > 0 && this.keyEvents.length > 0) {
-      for (var j in this.keyEvents) {
-        var event = this.keyEvents[j];
+    if (this.clickableNotes.size > 0 && this.keyEvents.size > 0) {
+      for (var event of this.keyEvents) {
+        //var event = this.keyEvents[j];
         var key = this.getKeyByKeycode(event.keyCode);
 
-        for (var i in this.clickableNotes) {
-          var note = this.clickableNotes[i];
+        for (var note of this.clickableNotes) {
+          //var note = this.clickableNotes[i];
 
           if (note.column == key.column) {
             var error = note.time - event.time;
@@ -212,21 +231,26 @@ export class Game {
                 }
               } else {
                 this.applyResult(result);
-                this.clickableNotes = this.clickableNotes.filter(e => e != note);
-                this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
+                this.clickableNotes.delete(note);
+                this.beatmap.hitObjects.delete(note);
+                //this.clickableNotes = this.clickableNotes.filter(e => e != note);
+                //this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
               }
             } else {
               if (note instanceof HoldNote) {
                 if (note.pressed && note.nodes[0] instanceof TailNote) {
                   error = note.endTime - event.time;
+                  error /= 1.5;
                   result = HitWindow.getResult(error);
                   if (result.range > HitResults.GOOD.range) {
                     result = HitResults.GOOD;
                   }
 
                   this.applyResult(result);
-                  this.clickableNotes = this.clickableNotes.filter(e => e != note);
-                  this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
+                  this.clickableNotes.delete(note);
+                  this.beatmap.hitObjects.delete(note);
+                  //this.clickableNotes = this.clickableNotes.filter(e => e != note);
+                  //this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
                 } else {
                   note.pressed = false;
                 }
@@ -239,8 +263,8 @@ export class Game {
       }
     }
 
-    this.keyEvents.length = 0;
-    this.clickableNotes.length = 0;
+    this.keyEvents.clear();
+    this.clickableNotes.clear();
   }
 
   applyResult(result) {
@@ -326,8 +350,8 @@ export class Game {
   getNotes(time) {
     var notes = [];
 
-    for (var i in this.beatmap.hitObjects) {
-      var note = this.beatmap.hitObjects[i];
+    for (var note of this.beatmap.hitObjects) {
+      //var note = this.beatmap.hitObjects[i];
 
       var diff = note.time - time;
       if (note instanceof HoldNote) {
@@ -342,7 +366,8 @@ export class Game {
                 this.applyResult(HitResults.HOLD_TICK);
 
                 if (note.nodes.length == 0) {
-                  this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
+                  this.beatmap.hitObjects.delete(note);
+                  //this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
                   continue;
                 }
               } else {
@@ -362,14 +387,16 @@ export class Game {
 
         if (diff < -HitResults.GOOD.range / 2) {
           if (note.pressed) {
-            this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
+            this.beatmap.hitObjects.delete(note);
+            //this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
             this.applyResult(HitResults.GOOD);
           }
         }
       }
 
       if (diff < -HitResults.MISS.range / 2) {
-        this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
+        this.beatmap.hitObjects.delete(note);
+        //this.beatmap.hitObjects = this.beatmap.hitObjects.filter(e => e !== note);
         if (!(note instanceof HoldNote)) {
           this.applyResult(HitResults.MISS);
           continue;
@@ -389,7 +416,7 @@ export class Game {
       }
     }
 
-    return notes;
+    return new Set(notes);
   }
 
   render(sr, interpolation) {
@@ -414,6 +441,10 @@ export class Game {
   handleKeyboardInput(keyCode, state) {
     if (this.state != 2) return;
 
+    if(keyCode == 13 && !this.playing) {
+      this.play();
+    }
+
     for (var i in this.keys) {
       var key = this.keys[i];
 
@@ -423,7 +454,7 @@ export class Game {
           //this.beatmap.s.play();
         }
         var a = new KeyEvent(keyCode, this.audioHandler.getCurrentTime(), state);
-        this.keyEvents.push(a);
+        this.keyEvents.add(a);
       }
     }
 

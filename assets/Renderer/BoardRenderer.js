@@ -17,11 +17,18 @@ export class BoardRenderer extends AbstractRenderer {
     this.indicesBuffer = gl.createBuffer();
 
     var width = game.keys.length * Key.width;
-    this.vertices = [
+    /*this.vertices = [
       -width / 2, 0,
       -width / 2, 1,
       width / 2, 1,
       width / 2, 0
+    ];*/
+
+    this.vertices = [
+      -0.5, 0,
+      -0.5, 1,
+      0.5, 1,
+      0.5, 0
     ];
 
     this.indices = [
@@ -40,9 +47,10 @@ export class BoardRenderer extends AbstractRenderer {
     gl.enableVertexAttribArray(this.positionAttribute);
     gl.enableVertexAttribArray(this.texCoordAttribute);
 
+    var width = game.keys.length * Key.width;
     this.shader.setVec2('texCoordScale', [1.0, 1.0]);
     this.shader.setVec2('offset', [game.width / 2, 0.0]);
-    this.shader.setVec2('size', [1.0, game.height]);
+    this.shader.setVec2('size', [width, game.height]);
 
     gl.bindTexture(gl.TEXTURE_2D, null);
 

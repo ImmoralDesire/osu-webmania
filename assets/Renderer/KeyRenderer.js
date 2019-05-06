@@ -47,9 +47,9 @@ export class KeyRenderer extends AbstractRenderer {
     this.vertices = [
     //        X           Y  U  V
               0,          0, 0, 1,
-              0, Key.height, 0, 0,
-      Key.width, Key.height, 1, 0,
-      Key.width,          0, 1, 1
+              0, 1, 0, 0,
+      1, 1, 1, 0,
+      1,          0, 1, 1
     ];
 
     this.indices = [
@@ -68,7 +68,6 @@ export class KeyRenderer extends AbstractRenderer {
     gl.enableVertexAttribArray(this.positionAttribute);
     gl.enableVertexAttribArray(this.texCoordAttribute);
 
-    this.shader.setVec2('texCoordScale', [1.0, 1.0]);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this.verticesBuffer);
     gl.vertexAttribPointer(this.positionAttribute, 2, gl.FLOAT, gl.FALSE, 4 * 4, 0);
@@ -87,7 +86,7 @@ export class KeyRenderer extends AbstractRenderer {
       var pressed = key.pressed ? '_pressed' : '';
 
       this.shader.setVec2('offset', [x + i * Key.width, 0]);
-      this.shader.setVec2('size', [1, 1]);
+      this.shader.setVec2('size', [Key.width, Key.height]);
 
       game.renderer.textureManager.getTexture('key_' + name + pressed).bindTexture();
 

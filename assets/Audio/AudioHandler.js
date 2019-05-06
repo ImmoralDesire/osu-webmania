@@ -78,7 +78,7 @@ export class AudioHandler {
     this.currentTrack.startTime = this.time;
     console.log(this.currentTrack.startTime);
     this.currentTrack.source.playbackRate.value = game.speed;
-    this.currentTrack.source.start(0);
+    this.currentTrack.source.start(this.context.currentTime + 2);
     this.currentTrack.playing = true;
     this.currentTrack.offset = this.time;
     console.log(this.currentTrack.offset);
@@ -99,10 +99,10 @@ export class AudioHandler {
   getCurrentTime() {
     //console.log("GAYT:" + (this.offset));
     if (!this.currentTrack.playing) {
-      return 0;
+      return -2000;
     }
 
 
-    return (this.time - this.currentTrack.offset + this.offset) * game.speed; //this.context.currentTime * 1000 - this.offset;
+    return (this.time - this.currentTrack.offset + this.offset) * game.speed - 2000; //this.context.currentTime * 1000 - this.offset;
   }
 }

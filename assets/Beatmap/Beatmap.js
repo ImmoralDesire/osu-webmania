@@ -17,7 +17,7 @@ export class Beatmap {
     this.keySound;
 
     this.timingPoints = [];
-    this.hitObjects = [];
+    this.hitObjects = new Set();
     this.bpm = 0;
   }
 
@@ -26,7 +26,7 @@ export class Beatmap {
     var parse = false;
     var meta = false;
     var bg = false;
-    var objects = [];
+    var objects = new Set();
 
     var bg = file.match(/0,0,"(.*?)"/)[1];
     this.bg = bg;
@@ -80,7 +80,7 @@ export class Beatmap {
           note = new HoldNote(column, time, endTime);
         }
         //console.log(note);
-        objects.push(note);
+        objects.add(note);
       } else {
         parse = false;
       }
@@ -95,7 +95,7 @@ export class Beatmap {
     });
 
     this.hitObjects = objects;
-    this.totalNotes = this.hitObjects.length;
+    this.totalNotes = this.hitObjects.size;
   }
 }
 

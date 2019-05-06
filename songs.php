@@ -2,6 +2,8 @@
 $za = new ZipArchive();
 $TITLE_REGEX = '~Title:(.*)~';
 $VERSION_REGEX = '~Version:(.*)~';
+$ARTIST_REGEX = '~Artist:(.*)~';
+$CREATOR_REGEX = '~Creator:(.*)~';
 $AUDIO_REGEX = '~AudioFilename:(.*)~';
 $BACKGROUND_REGEX = '~0,0,"(.*?)"~';
 $KEYS_REGEX = '~CircleSize:(.*)~';
@@ -34,6 +36,9 @@ class Beatmap
 {
     public $title;
     public $version;
+    public $artist;
+    public $creator;
+
     public $audio;
     public $background;
 
@@ -53,33 +58,49 @@ class Beatmap
 
         global $TITLE_REGEX;
         global $VERSION_REGEX;
+        global $ARTIST_REGEX;
+        global $CREATOR_REGEX;
+
         global $AUDIO_REGEX;
         global $BACKGROUND_REGEX;
+
         global $KEYS_REGEX;
         global $MODE_REGEX;
 
         preg_match($TITLE_REGEX, $file, $title);
         preg_match($VERSION_REGEX, $file, $version);
+        preg_match($ARTIST_REGEX, $file, $artist);
+        preg_match($CREATOR_REGEX, $file, $creator);
+
         preg_match($AUDIO_REGEX, $file, $audio);
         preg_match($BACKGROUND_REGEX, $file, $background);
+
         preg_match($KEYS_REGEX, $file, $keys);
         preg_match($MODE_REGEX, $file, $mode);
 
         $title = trim($title[1]);
         $version = trim($version[1]);
+        $artist = trim($artist[1]);
+        $creator = trim($creator[1]);
+
         $audio = trim($audio[1]);
         $background = trim($background[1]);
+
         $keys = (int) trim($keys[1]);
         $mode = (int) trim($mode[1]);
 
         $beatmap->title = $title;
         $beatmap->version = $version;
+        $beatmap->artist = $artist;
+        $beatmap->creator = $creator;
+
         $beatmap->audio = $audio;
         $beatmap->background = $background;
+
         $beatmap->keys = $keys;
         $beatmap->mode = $mode;
 
-        /*foreach (explode("\n", $file) as $line) {
+        foreach (explode("\n", $file) as $line) {
             $line = trim($line);
 
             if ($parse && strlen($line) != 0) {
@@ -94,7 +115,7 @@ class Beatmap
                  * type: 1 for circle, 128 for long note
                  *
                  * endTime: end of long note in milliseconds
-                 *//*
+                 */
                 $tags = explode(",", $line);
                 $columnWidth = 512 / $keys;
                 $column = (int) min(floor($tags[0] / $columnWidth), $keys - 1);
@@ -120,7 +141,7 @@ class Beatmap
             if ($line == "[HitObjects]") {
                 $parse = true;
             }
-        }*/
+        }
 
         $beatmap->objects = $objects;
         $beatmap->totalNotes = count($objects);
@@ -365,7 +386,9 @@ foreach (getDirContents("songs/unpacked") as $filename) {
         $map = array();
         $map['title'] = $beatmap->title;
         $map['version'] = $beatmap->version;
-        $map['difficulty'] = 420.69;//DifficultyCalculator::calculateDifficulty($beatmap);
+        $map['artist'] = $beatmap->artist;
+        $map['creator'] = $beatmap->creator;
+        $map['difficulty'] = DifficultyCalculator::calculateDifficulty($beatmap);
         $map['keys'] = $beatmap->keys;
         $map['background'] = $dir.DIRECTORY_SEPARATOR.$background;
         $map['audio'] = $dir.DIRECTORY_SEPARATOR.$audio;
@@ -377,6 +400,18 @@ foreach (getDirContents("songs/unpacked") as $filename) {
 }
 
 usort($maps, function($a, $b) {
+  if(strcasecmp($a['title'], $b['title']) == 0) {
+    if(strcasecmp($a['artist'], $b['artist']) == 0) {
+      if(strcasecmp($a['creator'], $b['creator']) == 0) {
+        return $a['difficulty'] > $b['difficulty'];
+      }
+
+      return strcasecmp($a['creator'], $b['creator']);
+    }
+
+    return strcasecmp($a['artist'], $b['artist']);
+  }
+
   return strcasecmp($a['title'], $b['title']);
 });
   //unzip($file, $maps);

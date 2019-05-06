@@ -1,5 +1,5 @@
-const width = 75;
-const height = 105;
+let width = 128;
+let height = width * 1.4;
 
 export class Key {
 
@@ -15,8 +15,8 @@ export class Key {
 
         this.pressed = false;
 
-        this.width = 100;
-        this.height = 140;
+        //this.width = 100;
+        //this.height = this.width * 1.4;
     }
 
     static get width() {
@@ -25,5 +25,13 @@ export class Key {
 
     static get height() {
       return height;
+    }
+
+    static set width(w) {
+      width = w;
+    }
+
+    static set height(h) {
+      height = h;
     }
 }

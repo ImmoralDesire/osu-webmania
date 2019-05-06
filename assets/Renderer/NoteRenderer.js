@@ -102,19 +102,18 @@ export class NoteRenderer extends AbstractRenderer {
     var middle = (game.renderer.sr.width - game.keys.length * Key.width) / 2;
     var now = game.now();
 
-    for(var i in game.beatmap.hitObjects) {
-      var note = game.beatmap.hitObjects[i];
+    for(var note of game.beatmap.hitObjects) {
+      //var note = game.beatmap.hitObjects[i];
       var texture = this.getTexture(note);
       var y = note.time - now;
       var x = middle + note.column * Key.width;
 
       y *= game.scrollSpeed / 16;
-      y += Key.height / 2
+      y += Key.height / 2;
 
       if(y > game.height) {
         break;
       }
-
 
       if(note instanceof HoldNote) {
         this.renderHoldNote(note, x, y, Key.height - Key.width);
@@ -147,11 +146,15 @@ export class NoteRenderer extends AbstractRenderer {
     var texture = this.getTickTexture(note);
     var scale = game.scrollSpeed / 16;
     if(note.pressed) {
-      this.shader.setVec2('offset', [x, Key.width / 2 + offset]);
-      this.shader.setVec2('size', [Key.width, y - offset + note.duration * scale]);
+      var size = Math.max(y - offset + note.duration * scale, 0);
+      var pos = Key.width / 2 + offset;
+      this.shader.setVec2('offset', [x, pos]);
+      this.shader.setVec2('size', [Key.width, size]);
     } else {
-      this.shader.setVec2('offset', [x, y + Key.width / 2]);
-      this.shader.setVec2('size', [Key.width, note.duration * scale]);
+      var size = note.duration * scale;
+      var pos = y + Key.width / 2;
+      this.shader.setVec2('offset', [x, pos]);
+      this.shader.setVec2('size', [Key.width, size]);
     }
 
     texture.bindTexture();
@@ -160,13 +163,18 @@ export class NoteRenderer extends AbstractRenderer {
 
     var tail = note.tailNote;
     var texture = this.getTexture(tail);
-
-    this.shader.setVec2('offset', [x, y + Key.width + note.duration * scale]);
+    var pos = y + Key.width + note.duration * scale;
+    if(note.pressed && pos <= Key.width + offset) {
+      var pos = Key.width + offset;
+    }
+    this.shader.setVec2('clip', [0.0, 0.5]);
+    this.shader.setVec2('offset', [x, pos]);
     this.shader.setVec2('size', [Key.width, -Key.width]);
 
     texture.bindTexture();
 
     gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
+    this.shader.setVec2('clip', [0.0, 0.0]);
   }
 
   getTickTexture(note) {

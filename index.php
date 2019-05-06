@@ -35,7 +35,9 @@
 
     <body>
         <div id="load">
-          <img id="start" src="logo.svg" />
+          <div id="start">
+            <img src="logo.png">
+          </div>
         </div>
         <div id="menu">
           <input type="file" id="beatmap">
@@ -73,7 +75,6 @@
 
             uniform vec2 offset;
             uniform vec2 size;
-            uniform vec2 texCoordScale;
 
             varying vec2 texCoord;
 
@@ -91,8 +92,12 @@
             varying vec2 texCoord;
 
             uniform sampler2D sampler;
+            uniform vec2 clip;
 
             void main() {
+              if(texCoord.y < clip.y) {
+                 discard;
+              }
               gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0) * texture2D(sampler, texCoord);
             }
         </script>

@@ -1,0 +1,60 @@
+osu file format v14
+
+[General]
+AudioFilename: 04. AiAe.mp3
+AudioLeadIn: 0
+PreviewTime: 43674
+Countdown: 0
+SampleSet: Soft
+StackLeniency: 0.7
+Mode: 3
+LetterboxInBreaks: 0
+SpecialStyle: 0
+WidescreenStoryboard: 1
+
+[Editor]
+DistanceSpacing: 2
+BeatDivisor: 4
+GridSize: 8
+TimelineZoom: 1.1
+
+[Metadata]
+Title:AiAe
+TitleUnicode:AiAe
+Artist:Yuyoyuppe
+ArtistUnicode:ゆよゆっぺ
+Creator:Fullerene-
+Version:short note
+Source:
+Tags:waflessmo Yolomania 3 Yolo3 YUYOYU EP DJ'TEKINA//SOMETHING Hatsune Miku Append Dark Vocaloid Hardcore Dubstep
+BeatmapID:0
+BeatmapSetID:-1
+
+[Difficulty]
+HPDrainRate:6
+CircleSize:4
+OverallDifficulty:7
+ApproachRate:5
+SliderMultiplier:1.4
+SliderTickRate:1
+
+[Events]
+//Background and Video events
+0,0,"bg.png",0,0
+//Break Periods
+//Storyboard Layer 0 (Background)
+//Storyboard Layer 1 (Fail)
+//Storyboard Layer 2 (Pass)
+//Storyboard Layer 3 (Foreground)
+//Storyboard Sound Samples
+
+[TimingPoints]
+1008,750,4,2,1,50,1,0
+107674,-100,4,2,1,50,0,1
+127674,-100,4,2,1,50,0,0
+171674,-100,4,2,1,50,0,1
+214341,-100,4,2,1,50,0,0
+
+
+[HitObjects]
+320,192,1008,128,0,1195:0:0:0:0:

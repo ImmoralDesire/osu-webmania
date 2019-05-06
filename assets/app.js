@@ -65,19 +65,30 @@ var lMap = function(blob, key) {
 
 var loadMaps = function() {
   return new Promise((resolve, reject) => {
-    fetch('songs.php').then(resp => {
+    fetch('songs.json').then(resp => {
       return resp.json();
     }).then(json => {
       maps = json;
 
       maps['songs'].forEach(map => {
         document.getElementById('songs').innerHTML += `
-        <div class="map">
-          <img class="thumb" src="${map.background}" width="100" height="80">
-          <span class="title">
-            <a data-title="${map.title}" data-version="${map.version}">${map.title} [${map.version}] (${map.keys}K) ${map.difficulty.toFixed(2)} Stars</a>
-          </span>
-        </div><br>`;
+        <div class="map" data-title="${map.title}" data-version="${map.version}">
+          <img class="thumb" src="${map.background}" width="160" height="90">
+          <div class="data">
+            <span class="title">
+              ${map.title}
+            </span>
+            <span class="artist">
+              ${map.artist} // ${map.creator}
+            </span>
+            <span class="version">
+              ${map.version} (${map.keys}K)
+            </span>
+            <span class="stars">
+              ${map.difficulty.toFixed(2)} Stars
+            </span>
+          </div>
+        </div>`;
       });
 
       resolve(true);
@@ -201,12 +212,13 @@ var start_game = function(beatmap) {
   document.getElementById('acc').style = 'visibility: visible;';
 
   document.getElementById('menu').style = 'display: none;';
+  document.getElementById('game').style = 'display: block;';
 
   game.scrollSpeed = scroll;
   game.speed = speed;
   game.setBeatmap(beatmap);
   game.init(() => {
-    game.play();
+
   });
 };
 
@@ -220,8 +232,8 @@ document.getElementById('start').addEventListener('click', async (e) => {
 
   Array.from(document.getElementsByClassName('map')).forEach(element => {
     element.addEventListener('click', (e) => {
-      //console.log(e);
-      var data = maps['songs'].filter(map => map.title == e.target.getAttribute('data-title') && map.version == e.target.getAttribute('data-version'))[0];
+      console.log(e);
+      var data = maps['songs'].filter(map => map.title == element.getAttribute('data-title') && map.version == element.getAttribute('data-version'))[0];
       var beatmap = new Beatmap();
 
       fetch(data.file).then(resp => {
@@ -234,7 +246,7 @@ document.getElementById('start').addEventListener('click', async (e) => {
 
         //var keySound = await game.audioHandler.loadSound("key_sound", data.dir + "/" + beatmap.keySound, true);
         //beatmap.s = keySound;
-        
+
         var texture = game.renderer.textureManager.loadTexture(data.background, data.background);
         beatmap.texture = texture;
         console.log(beatmap);

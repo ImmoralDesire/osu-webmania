@@ -43,18 +43,25 @@ canvas {
 }
 
 #start {
-  position: relative;
-  display: block;
+  position: absolute;
+  display: inline-flex;
   top: 50%;
   left: 50%;
+  max-height: 60vh;
+  max-width: 60vh;
   transform: translate(-50%, -50%);
-  height: 60%;
-  width: 60%;
 }
 
-#start:hover {
-  height: 55%;
-  width: 55%;
+#start img {
+  display: inline-block;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+
+#start:hover img {
+  height: 95%;
+  width: 95%;
 }
 
 #game {
@@ -116,17 +123,23 @@ canvas {
   position: absolute;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: calc(100vh - 10px);
   overflow-y: scroll;
+  border: 5px purple solid;
 }
 
 .map {
-  width: 100%;
+  width: calc(100% - 2px);
   display: flex;
   align-items: center; /* Vertical center alignment */
-  justify-content: center;
+  background-color: lightgray;
+  border: 1px black solid;
 }
 
-.title {
-  width: 100%;
+.data {
+  margin-left: 5px;
+}
+
+.data span {
+  display: block;
 }
